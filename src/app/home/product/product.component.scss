@@ -1,0 +1,11 @@
+.center-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: calc(100vh - 100px);
+}
+.image-circle{
+    background-color: #c7c1b0;
+    height: 130px;
+}

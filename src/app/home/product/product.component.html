@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="center-content">
+        <div class="w-100 pt-3 pb-3">
+            <div class="col">
+                <div class="font-weight-bold">
+                    Add Product to Divisions
+                </div>
+            </div>
+            <!--When multiple product is coming I am using *ngFor and display html template-->
+            <div class="row justify-content-center pt-3">
+                <div class="col-auto">
+                    <div class="card text-center p-5">
+                        <div class="card-body">
+                            <div class="rounded-circle image-circle">
+                                <img src="../../../assets/images/bakery.png" class="img-fluid p-2" alt="bakery"
+                                    width="120" />
+                            </div>
+                            <p class="card-text font-weight-bold pt-3 text-muted">Backery</p>
+                            <button type="button" class="btn button-primary" (click)="addProductStepOne('Backery')"> + Add
+                                Product</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto pt-xl-0 pt-lg-0 pt-mb-0 pt-sm-0 pt-3">
+                    <div class="card text-center p-5">
+                        <div class="card-body">
+                            <div class="rounded-circle image-circle">
+                                <img src="../../../assets/images/milk.png" class="img-fluid p-2" alt="bakery"
+                                    width="120" />
+                            </div>
+                            <p class="card-text font-weight-bold pt-3 text-muted">Deli</p>
+                            <button type="button" class="btn button-primary" (click)="addProductStepOne('Deli')"> + Add Product</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
