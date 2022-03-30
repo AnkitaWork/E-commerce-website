@@ -1,11 +1,11 @@
 //External imports
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-product-add-step1',
   templateUrl: './product-add-step1.component.html',
-  styleUrls: ['./product-add-step1.component.scss']
+  styleUrls: ['./product-add-step1.component.less']
 })
 export class ProductAddStep1Component implements OnInit {
   @Input() data: any; //this variable used to get dialog data 
