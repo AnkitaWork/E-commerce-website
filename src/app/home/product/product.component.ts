@@ -1,31 +1,43 @@
 //External imports
-import { Component, OnInit, Injector } from '@angular/core';
-import { DialogService } from './../../shared/services/dialog.service';
+import { Component, OnInit } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
 //Internal imports
-import { ProductAddStep1Component } from './../add-product/product-add-step1/product-add-step1.component';
+import { AddProductComponent } from './../add-product/add-product.component';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.less']
+  styleUrls: ['./product.component.less'],
+  providers: [DialogService, MessageService]
 })
 
 export class ProductComponent implements OnInit {
+  ref: DynamicDialogRef | any;
 
-  constructor(private _injector: Injector) { }
+  constructor(public dialogService: DialogService, public messageService: MessageService) { }
 
-  /**
-     * This is used to open custom dialog step one
-     */
-  public addProductStepOne(productName:string){
-    let dialogService = this._injector.get(DialogService);
-    let dialog = dialogService.custom(ProductAddStep1Component, {data:productName});
-    dialog.result.then((res) => {
-      console.log('res',res);
+  public addProductStepOne(productName: string) {
+    this.ref = this.dialogService.open(AddProductComponent, {
+      header:'Add Product to ' +productName,
+      width: 'auto',
+      baseZIndex: 10000,
+      dismissableMask: true
+    });
+
+    this.ref.onClose.subscribe((product: any) => {
+      if (product) {
+        //dialog data receive here
+      }
     });
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
+    }
+  }
 }
