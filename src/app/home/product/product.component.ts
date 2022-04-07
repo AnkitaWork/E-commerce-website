@@ -20,7 +20,8 @@ export class ProductComponent implements OnInit {
   public addProductStepOne(productName: string) {
     this.ref = this.dialogService.open(AddProductComponent, {
       header:'Add Product to ' +productName,
-      width: 'auto',
+      width: '41.25rem',
+      height:'41.875rem',
       baseZIndex: 10000,
       dismissableMask: true
     });

@@ -16,26 +16,44 @@ export class AddProductComponent implements OnInit {
     { id: 1, displayText: 'Prep for Yesterday' },
   ];//binding static lookup with activity dropdown
   public stepManageVariable: number = 1;
-  public country = [
+  public countryList = [
     {
       "id": 1000,
       "counteryName": "011-Atlanta",
-      "text": 'Shelf Me and UPS status may be updated'
+      "displayText": '',
+      "checked":false
     },
     {
       "id": 1001,
       "counteryName": "002-Centeral",
-      "text": 'Shelf Me and UPS status may be updated'
+      "displayText": 'Shelf Me and UPS status may be updated',
+      "checked":false
     },
     {
       "id": 1002,
       "counteryName": "035-Delta",
-      "text": 'Shelf Me and UPS status may be updated'
+      "displayText": 'Shelf Me and UPS status may be updated',
+      "checked":false
+    },
+    {
+      "id": 1003,
+      "counteryName": "045-Atlana",
+      "displayText": 'Shelf Me and UPS status may be updated',
+      "checked":false
+    },
+    {
+      "id": 1004,
+      "counteryName": "912-Centeral",
+      "displayText": '',
+      "checked":false
+    },
+    {
+      "id": 1005,
+      "counteryName": "078-Delta",
+      "displayText": '',
+      "checked":false
     }
   ];
-  public totalRecords: number = 0;
-  public selectAll: boolean = false;
-  public selectedCountry = this.country;
 
   constructor(private ref: DynamicDialogRef, private formBuilder: FormBuilder,) { }
 
@@ -53,6 +71,20 @@ export class AddProductComponent implements OnInit {
     }
   }
 
+   /**
+    * This function is used to onselection changes
+    */
+  public selectAll(value:any){
+    if(value?.checked){
+      this.countryList?.forEach(country => {
+        country.checked = true;
+      });
+    } else {
+      this.countryList?.forEach(country => {
+        country.checked = false;
+      });
+    }
+  }
   /**
     * This function is used to close dialog
     */
@@ -86,29 +118,6 @@ export class AddProductComponent implements OnInit {
     */
   get productAddStepOneFormValue() {
     return this.productAddStepOne.controls;
-  }
-
-   /**
-    * This function is used to onselection changes
-    */
-  public onSelectionChange(value = []) {
-    this.selectAll = value.length === this.totalRecords;
-    this.selectedCountry = value;
-  }
-
-   /**
-    * This function is used to select deselect event
-    */
-  public onSelectAllChange(event: any) {
-    const checked = event.checked;
-    if (checked) {
-        this.selectedCountry = [...this.country];
-        this.selectAll = true;
-    }
-    else {
-      this.selectedCountry = [];
-      this.selectAll = false;
-    }
   }
 
   ngOnInit(): void {
