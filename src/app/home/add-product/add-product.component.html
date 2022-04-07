@@ -1,103 +1,109 @@
-<div class="w-100">
-    <span>
-        Step {{stepManageVariable}} of 3
-    </span>
-    <div class="modal-body clearfix" *ngIf="stepManageVariable < 2">
-        <div [ngClass]="{'p-xl-5 p-lg-5 p-md-3 p-sm-2 p-2':!submitted,'padding-body':submitted}">
-            <!--Step 1 start-->
-            <form [formGroup]="productAddStepOne" class="needs-validation pl-3 pr-3"
-                [ngClass]="{'was-validated':submitted}" novalidate *ngIf="stepManageVariable === 1">
-                <!--Field first start-->
-                <div class="form-group">
-                    <label for="upc" class="form-label">UPC</label>
-                    <input type="text" class="form-control" pInputText formControlName="upc" id="upc"
-                        placeholder="Enter UPC" required>
-                    <div *ngIf="submitted && productAddStepOneFormValue['upc'].errors" class="alert alert-danger">
-                        <ng-container *ngIf="productAddStepOneFormValue['upc'].errors.required">
-                            <img src="../../../../assets/images/experimental_icon1.png" height="20px">
-                            This field is required.
-                        </ng-container>
+<p-dialog header="Header" [(visible)]="isOpenDialog" [modal]="true" [style]="{width: '41.25rem',height:'41.875rem'}"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false" (onHide)="dialogCloseEvent()">
+    <p-header>
+        Add Product to {{productName}}
+        <div class="step-style"> Step {{stepManageVariable}} of 3</div>
+    </p-header>
+    <div class="modal-body d-flex align-items-center clearfix" *ngIf="stepManageVariable < 2">
+        <div class="col w-100">
+            <div [ngClass]="{'p-xl-5 p-lg-5 p-md-3 p-sm-2 p-2':!submitted,'padding-body':submitted}">
+                <!--Step 1 start-->
+                <form [formGroup]="productAddStepOne" class="needs-validation pl-3 pr-3"
+                    [ngClass]="{'was-validated':submitted}" novalidate *ngIf="stepManageVariable === 1">
+                    <!--Field first start-->
+                    <div class="form-group">
+                        <label for="upc" class="form-label">UPC</label><span class="text-danger pl-1"><b>*</b></span>
+                        <input type="text" class="form-control" pInputText formControlName="upc" id="upc"
+                            placeholder="Enter UPC" required>
+                        <div *ngIf="submitted && productAddStepOneFormValue['upc'].errors" class="alert alert-danger">
+                            <ng-container *ngIf="productAddStepOneFormValue['upc'].errors.required">
+                                <img src="../../../../assets/images/experimental_icon1.png" height="20px">
+                                This field is required.
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
-                <!--Field first end-->
-                <!--Field second start-->
-                <div class="form-group">
-                    <label for="activity">Activity</label>
-                    <select class="form-control" formControlName="activity" id="activity" required>
-                        <option value="">
-                            Choose an Activity
-                        </option>
-                        <option *ngFor="let activity of activityDropDownData" [value]="activity?.id">
-                            {{ activity?.displayText }}
-                        </option>
-                    </select>
-                    <div *ngIf="submitted && productAddStepOneFormValue['activity'].errors" class="alert alert-danger">
-                        <ng-container *ngIf="productAddStepOneFormValue['activity'].errors.required">
-                            <img src="../../../../assets/images/experimental_icon1.png" height="20px">
-                            This field is required.
-                        </ng-container>
+                    <!--Field first end-->
+                    <!--Field second start-->
+                    <div class="form-group">
+                        <label for="activity">Activity</label><span class="text-danger pl-1"><b>*</b></span>
+                        <select class="form-control" formControlName="activity" id="activity" required>
+                            <option value="">
+                                Choose an Activity
+                            </option>
+                            <option *ngFor="let activity of activityDropDownData" [value]="activity?.id">
+                                {{ activity?.displayText }}
+                            </option>
+                        </select>
+                        <div *ngIf="submitted && productAddStepOneFormValue['activity'].errors"
+                            class="alert alert-danger">
+                            <ng-container *ngIf="productAddStepOneFormValue['activity'].errors.required">
+                                <img src="../../../../assets/images/experimental_icon1.png" height="20px">
+                                This field is required.
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
-                <!--Field second end-->
-                <!--Field third start-->
-                <div class="form-group">
-                    <label for="shelflife">Shelf Life (Days)</label>
-                    <input type="text" formControlName="shelfLife" pInputText class="form-control" id="shelflife"
-                        placeholder="Enter Days" required>
-                    <div *ngIf="submitted && productAddStepOneFormValue['shelfLife'].errors" class="alert alert-danger">
-                        <ng-container *ngIf="productAddStepOneFormValue['shelfLife'].errors.required">
-                            <img src="../../../../assets/images/experimental_icon1.png" height="20px">
-                            This field is required.
-                        </ng-container>
-                        <ng-container *ngIf="productAddStepOneFormValue['shelfLife'].errors.pattern">
-                            <img src="../../../../assets/images/experimental_icon1.png" height="20px">
-                            Shelf life days should be numberic.
-                        </ng-container>
+                    <!--Field second end-->
+                    <!--Field third start-->
+                    <div class="form-group">
+                        <label for="shelflife">Shelf Life (Days)</label><span class="text-danger pl-1"><b>*</b></span>
+                        <input type="text" formControlName="shelfLife" pInputText class="form-control" id="shelflife"
+                            placeholder="Enter Days" required>
+                        <div *ngIf="submitted && productAddStepOneFormValue['shelfLife'].errors"
+                            class="alert alert-danger">
+                            <ng-container *ngIf="productAddStepOneFormValue['shelfLife'].errors.required">
+                                <img src="../../../../assets/images/experimental_icon1.png" height="20px">
+                                This field is required.
+                            </ng-container>
+                            <ng-container *ngIf="productAddStepOneFormValue['shelfLife'].errors.pattern">
+                                <img src="../../../../assets/images/experimental_icon1.png" height="20px">
+                                Shelf life days should be numberic.
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
-                <!--Field third end-->
-                <!--Field four start-->
-                <div class="form-group">
-                    <div class="p-field-checkbox">
-                        <p-checkbox name="group1" value="Activites In Stores" formControlName="activityInStoreFlag"
-                            inputId="ais"></p-checkbox>
-                        <label for="ais" class="mb-0 pl-2"
-                            [ngClass]="{'text-danger':productAddStepOneFormValue['activityInStoreFlag']?.errors?.required && submitted}">Activites
-                            In Stores</label>
+                    <!--Field third end-->
+                    <!--Field four start-->
+                    <div class="form-group">
+                        <div class="p-field-checkbox">
+                            <p-checkbox name="group1" value="Activites In Stores" formControlName="activityInStoreFlag"
+                                inputId="ais"></p-checkbox>
+                            <label for="ais" class="mb-0 pl-2"
+                                [ngClass]="{'text-danger':productAddStepOneFormValue['activityInStoreFlag']?.errors?.required && submitted}">Activites
+                                In Stores</label><span class="text-danger pl-1"><b>*</b></span>
+                        </div>
                     </div>
-                </div>
-                <!--Field four end-->
-            </form>
-            <!--Step 1 end-->
-            <!--Step 0 start add product-->
-            <ng-container *ngIf="stepManageVariable === 0">
-                <div class="text-center font-weight-bold text-muted">Select a Department</div>
-                <div class="row justify-content-center pt-3">
-                    <div class="col-auto">
-                        <div class="card text-center p-3">
-                            <div class="card-body">
-                                <div class="rounded-circle image-circle">
-                                    <img src="../../../assets/images/bakery.png" class="img-fluid p-2" alt="bakery"
-                                        width="120" />
+                    <!--Field four end-->
+                </form>
+                <!--Step 1 end-->
+                <!--Step 0 start add product-->
+                <ng-container *ngIf="stepManageVariable === 0">
+                    <div class="text-center font-weight-bold text-muted">Select a Department</div>
+                    <div class="row justify-content-center pt-3">
+                        <div class="col-auto">
+                            <div class="card text-center p-3">
+                                <div class="card-body">
+                                    <div class="rounded-circle image-circle">
+                                        <img src="../../../assets/images/bakery.png" class="img-fluid p-2" alt="bakery"
+                                            width="120" />
+                                    </div>
+                                    <p class="card-text font-weight-bold pt-3 text-muted">Backery</p>
                                 </div>
-                                <p class="card-text font-weight-bold pt-3 text-muted">Backery</p>
+                            </div>
+                        </div>
+                        <div class="col-auto pt-xl-0 pt-lg-0 pt-mb-0 pt-sm-0 pt-3">
+                            <div class="card text-center p-3">
+                                <div class="card-body">
+                                    <div class="rounded-circle image-circle">
+                                        <img src="../../../assets/images/milk.png" class="img-fluid p-2" alt="bakery"
+                                            width="120" />
+                                    </div>
+                                    <p class="card-text font-weight-bold pt-3 text-muted">Deli</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto pt-xl-0 pt-lg-0 pt-mb-0 pt-sm-0 pt-3">
-                        <div class="card text-center p-3">
-                            <div class="card-body">
-                                <div class="rounded-circle image-circle">
-                                    <img src="../../../assets/images/milk.png" class="img-fluid p-2" alt="bakery"
-                                        width="120" />
-                                </div>
-                                <p class="card-text font-weight-bold pt-3 text-muted">Deli</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-            <!--Step 0 end add product-->
+                </ng-container>
+                <!--Step 0 end add product-->
+            </div>
         </div>
     </div>
     <!--Step 2 start-->
@@ -115,16 +121,18 @@
                 </div>
             </div>
             <div class="alert alert-warning p-2" role="alert">
-                <i class="fa fa-exclamation-triangle pr-2"></i>This product exists in one or more divisions. You may in
+                <i class="fa fa-exclamation-triangle pr-2"></i>This product exists in one or more divisions. You may
+                need to make updates in
                 impacted divisions.
             </div>
             <div class="table-responsive">
-                <table class="table table-striped" height='50%'>
+                <table class="table table-striped" height='50vw'>
                     <thead>
                         <tr>
                             <td colspan="3">
                                 <div class="p-field-checkbox ml-3">
-                                    <p-checkbox name="selectAll" value="true" (onChange)="selectAll($event)" [binary]="true"></p-checkbox>
+                                    <p-checkbox name="selectAll" value="true" (onChange)="selectAll($event)"
+                                        [binary]="true"></p-checkbox>
                                     <label for="selectAll" class="mb-0 select-all-margin">Select All</label>
                                 </div>
                             </td>
@@ -134,7 +142,8 @@
                         <tr *ngFor="let country of countryList;let i=index;">
                             <td scope="row" class="col-1">
                                 <div class="p-field-checkbox ml-3">
-                                    <p-checkbox name="checkBoxItem" [(ngModel)]="country.checked" [binary]="true"></p-checkbox>
+                                    <p-checkbox name="checkBoxItem" [(ngModel)]="country.checked" [binary]="true">
+                                    </p-checkbox>
                                     <label for="defaultCheck-{{i}}" class="mb-0 margin-left"></label>
                                 </div>
                             </td>
@@ -150,7 +159,7 @@
     <!--Step 2 end-->
     <!--Step 3 start-->
     <ng-container *ngIf="stepManageVariable === 3">
-        <div class="w-100 pl-5 pr-5 pt-3">
+        <div class="w-100 p-xl-5 p-lg-5 p-md-4 p-sm-4 p-4">
             <div class="text-center pb-3">
                 <div class="d-flex justify-content-center pb-2">
                     <div class="rounded-circle icon-rightclick"><i class="fa fa-check pt-4 fa-5x"
@@ -159,7 +168,7 @@
                 <h3><b>Product added to 14 divisions</b></h3>
                 <span>432 stores</span>
             </div>
-            <div class="alert alert-success border-0 p-3">
+            <div class="alert alert-success border-0 pl-4 pr-4 pt-2 pb-2">
                 <h6>000111106</h6>
                 <p>Backery Fresh Goodness Iced Angel Food Cake</p>
                 <div>Prep for Tomorrow</div>
@@ -169,12 +178,11 @@
         </div>
     </ng-container>
     <!--Step 3 end-->
-    <!--footer start-->
-    <div class="p-dialog-footer">
+    <ng-template pTemplate="footer">
         <div class="col">
             <div class="float-left">
                 <p-button *ngIf="stepManageVariable < 2" type="button" label="Cancel"
-                    styleClass="btn btn-outline-primary mr-2" (click)="close()">
+                    styleClass="btn btn-outline-primary mr-2" (click)="dialogCloseEvent()">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 2" type="button" label="Back"
                     styleClass="btn btn-outline-primary mr-2" (click)="backStep(1)">
@@ -187,13 +195,12 @@
                     styleClass="btn btn-outline-primary mr-2">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 3" type="button" label="Exit"
-                    styleClass="btn btn-outline-primary mr-2" (click)="close()">
+                    styleClass="btn btn-outline-primary mr-2" (click)="dialogCloseEvent()">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 3" type="button" label="Add Another Product"
                     styleClass="btn btn-outline-primary mr-2" (click)="addAnotherProduct()">
                 </p-button>
             </div>
         </div>
-    </div>
-    <!--footer end-->
-</div>
+    </ng-template>
+</p-dialog>
