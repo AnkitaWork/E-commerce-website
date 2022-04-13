@@ -80,12 +80,24 @@
                                     <img src="../../../assets/images/bakery.png" class="img-fluid p-2" alt="bakery"
                                         width="120" />
                                 </div>
+                                <p class="card-text font-weight-bold pt-3 text-muted">Backery</p>
                             </div>
                         </div>
                     </div>
-                </ng-container>
-                <!--Step 0 end add product-->
-            </div>
+                    <div class="col-auto pt-xl-0 pt-lg-0 pt-mb-0 pt-sm-0 pt-3">
+                        <div class="card text-center p-3">
+                            <div class="card-body">
+                                <div class="rounded-circle image-circle">
+                                    <img src="../../../assets/images/milk.png" class="img-fluid p-2" alt="bakery"
+                                        width="120" />
+                                </div>
+                                <p class="card-text font-weight-bold pt-3 text-muted">Deli</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <!--Step 0 end add product-->
         </div>
     </div>
     <!--Step 2 start-->
@@ -162,7 +174,7 @@
         <div class="col">
             <div class="float-left">
                 <p-button *ngIf="stepManageVariable < 2" type="button" label="Cancel"
-                    styleClass="btn btn-outline-primary mr-2" (click)="dialogCloseEvent()">
+                    styleClass="btn btn-outline-primary mr-2" (click)="close()">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 2" type="button" label="Back"
                     styleClass="btn btn-outline-primary mr-2" (click)="backStep(1)">
@@ -175,7 +187,7 @@
                     styleClass="btn btn-outline-primary mr-2">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 3" type="button" label="Exit"
-                    styleClass="btn btn-outline-primary mr-2" (click)="dialogCloseEvent()">
+                    styleClass="btn btn-outline-primary mr-2" (click)="close()">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 3" type="button" label="Add Another Product"
                     styleClass="btn btn-outline-primary mr-2" (click)="addAnotherProduct()">

@@ -1,19 +1,21 @@
 //External imports
 import { Component, OnInit } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+//Internal imports
+import { AddProductComponent } from './../add-product/add-product.component';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.less'],
-  providers: [MessageService]
+  providers: [DialogService, MessageService]
 })
 
 export class ProductComponent implements OnInit {
-  public productName : string = '';
-  public isOpenDialog = false;
+  ref: DynamicDialogRef | any;
 
-  constructor(public messageService: MessageService) { }
+  constructor(public dialogService: DialogService, public messageService: MessageService) { }
 
   public addProductStepOne(productName: string) {
     this.ref = this.dialogService.open(AddProductComponent, {
@@ -32,5 +34,11 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
+    }
   }
 }

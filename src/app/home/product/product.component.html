@@ -36,9 +36,4 @@
             </div>
         </div>
     </div>
-    <!--Dialog start-->
-    <ng-container *ngIf="isOpenDialog">
-        <app-add-product [isOpenDialog]="isOpenDialog" [productName]="productName" (dialogEventPass)="isOpenDialog = $event"></app-add-product>
-    </ng-container>
-    <!--Dialog end-->
 </div>
