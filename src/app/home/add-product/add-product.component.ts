@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.less']
+  styleUrls: ['./add-product.component.less'],
+  providers:[DynamicDialogRef]
 })
 export class AddProductComponent implements OnInit {
+  @Input() productName:string | any;
+  @Input() isOpenDialog:boolean | any;
+  @Output() dialogEventPass = new EventEmitter<any>(); 
   public submitted: boolean = false; //submit boolean value check form is submit or not
   public productAddStepOne: FormGroup | any; //form group variable
-  public displayBasic: boolean = true;
   public activityDropDownData = [
     { id: 1, displayText: 'Prep for Tomorrow' },
     { id: 1, displayText: 'Prep for Day before Tomorrow' },
@@ -57,6 +60,12 @@ export class AddProductComponent implements OnInit {
 
   constructor(private ref: DynamicDialogRef, private formBuilder: FormBuilder,) { }
 
+   /**
+     * This function is used to close dialog
+     */
+  public dialogCloseEvent(){
+    this.dialogEventPass.emit(false);
+  }
   /**
      * This function is used to submit form value and calling api
      */
