@@ -1,9 +1,9 @@
-<div class="container-main-modal">
+<div class="w-100">
     <span>
         Step {{stepManageVariable}} of 3
     </span>
-    <div class="modal-body p-xl-5 p-lg-5 p-mb-2 p-sm-2 p-2 clearfix" *ngIf="stepManageVariable !== 2">
-        <div class="p-xl-4 p-lg-4 p-mb-3 p-sm-3 p-3">
+    <div class="modal-body clearfix" *ngIf="stepManageVariable < 2">
+        <div [ngClass]="{'p-xl-5 p-lg-5 p-md-3 p-sm-2 p-2':!submitted,'padding-body':submitted}">
             <!--Step 1 start-->
             <form [formGroup]="productAddStepOne" class="needs-validation pl-3 pr-3"
                 [ngClass]="{'was-validated':submitted}" novalidate *ngIf="stepManageVariable === 1">
@@ -57,7 +57,7 @@
                 </div>
                 <!--Field third end-->
                 <!--Field four start-->
-                <div class="form-group pt-2">
+                <div class="form-group">
                     <div class="p-field-checkbox">
                         <p-checkbox name="group1" value="Activites In Stores" formControlName="activityInStoreFlag"
                             inputId="ais"></p-checkbox>
@@ -69,26 +69,6 @@
                 <!--Field four end-->
             </form>
             <!--Step 1 end-->
-             <!--Step 3 start-->
-            <ng-container *ngIf="stepManageVariable === 3">
-                <div class="pl-5 pr-5">
-                    <div class="text-center pb-3">
-                        <div class="d-flex justify-content-center pb-2">
-                            <div class="rounded-circle icon-rightclick"><i class="fa fa-check pt-4 fa-5x" aria-hidden="true"></i></div>
-                        </div>
-                        <h3><b>Product added to 14 divisions</b></h3>
-                        <span>432 stores</span>
-                    </div>
-                    <div class="alert alert-success border-0 p-3">
-                        <h6>000111106</h6>
-                        <p>Backery Fresh Goodness Iced Angel Food Cake</p>
-                        <div>Prep for Tomorrow</div>
-                        <div>Shelf Life : 2</div>
-                        <div>Active In Stores</div>
-                    </div>
-                </div>
-            </ng-container>
-             <!--Step 3 end-->
             <!--Step 0 start add product-->
             <ng-container *ngIf="stepManageVariable === 0">
                 <div class="text-center font-weight-bold text-muted">Select a Department</div>
@@ -135,38 +115,62 @@
                 </div>
             </div>
             <div class="alert alert-warning p-2" role="alert">
-                <i class="fa fa-exclamation-triangle"></i> This Product exists in one or more divisions. You may need to
-                make updates in impacted divisions.
+                <i class="fa fa-exclamation-triangle pr-2"></i>This product exists in one or more divisions. You may in
+                impacted divisions.
             </div>
-            <p-table [value]="country" [lazy]="true" responsiveLayout="scroll" dataKey="id"
-                [selection]="selectedCountry" (selectionChange)="onSelectionChange($event)"
-                (selectAllChange)="onSelectAllChange($event)" [paginator]="false" [rows]="3"
-                [totalRecords]="totalRecords" [selectAll]="selectAll"
-                [globalFilterFields]="['name','country.name', 'company', 'representative.name']">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                        <th>Select All</th>
-                        <th></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-country>
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="country"></p-tableCheckbox>
-                        </td>
-                        <td>{{country?.counteryName}}</td>
-                        <td>{{country?.text}}</td>
-                </ng-template>
-            </p-table>
-            <span>Divisions: 0 of {{country?.length}}</span>
+            <div class="table-responsive">
+                <table class="table table-striped" height='50%'>
+                    <thead>
+                        <tr>
+                            <td colspan="3">
+                                <div class="p-field-checkbox ml-3">
+                                    <p-checkbox name="selectAll" value="true" (onChange)="selectAll($event)" [binary]="true"></p-checkbox>
+                                    <label for="selectAll" class="mb-0 select-all-margin">Select All</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-scroll">
+                        <tr *ngFor="let country of countryList;let i=index;">
+                            <td scope="row" class="col-1">
+                                <div class="p-field-checkbox ml-3">
+                                    <p-checkbox name="checkBoxItem" [(ngModel)]="country.checked" [binary]="true"></p-checkbox>
+                                    <label for="defaultCheck-{{i}}" class="mb-0 margin-left"></label>
+                                </div>
+                            </td>
+                            <td class="col-3">{{country?.counteryName}}</td>
+                            <td class="col-8">{{country?.displayText}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <span>Divisions: 0 of {{countryList?.length}}</span>
         </div>
     </ng-container>
     <!--Step 2 end-->
+    <!--Step 3 start-->
+    <ng-container *ngIf="stepManageVariable === 3">
+        <div class="w-100 pl-5 pr-5 pt-3">
+            <div class="text-center pb-3">
+                <div class="d-flex justify-content-center pb-2">
+                    <div class="rounded-circle icon-rightclick"><i class="fa fa-check pt-4 fa-5x"
+                            aria-hidden="true"></i></div>
+                </div>
+                <h3><b>Product added to 14 divisions</b></h3>
+                <span>432 stores</span>
+            </div>
+            <div class="alert alert-success border-0 p-3">
+                <h6>000111106</h6>
+                <p>Backery Fresh Goodness Iced Angel Food Cake</p>
+                <div>Prep for Tomorrow</div>
+                <div>Shelf Life : 2</div>
+                <div>Active In Stores</div>
+            </div>
+        </div>
+    </ng-container>
+    <!--Step 3 end-->
     <!--footer start-->
-    <div class="modal-footer">
+    <div class="p-dialog-footer">
         <div class="col">
             <div class="float-left">
                 <p-button *ngIf="stepManageVariable < 2" type="button" label="Cancel"
@@ -179,8 +183,8 @@
             <div class="float-right">
                 <p-button type="submit" *ngIf="stepManageVariable === 1" label="Select Divisions"
                     styleClass="btn btn-outline-primary" (click)="stepOneSubmitForm()"></p-button>
-                <p-button type="button" *ngIf="stepManageVariable === 2" (click)="stepTwoSubmitForm()" 
-                    label="Finish" styleClass="btn btn-outline-primary mr-2">
+                <p-button type="button" *ngIf="stepManageVariable === 2" (click)="stepTwoSubmitForm()" label="Finish"
+                    styleClass="btn btn-outline-primary mr-2">
                 </p-button>
                 <p-button *ngIf="stepManageVariable === 3" type="button" label="Exit"
                     styleClass="btn btn-outline-primary mr-2" (click)="close()">
@@ -191,5 +195,5 @@
             </div>
         </div>
     </div>
-     <!--footer end-->
+    <!--footer end-->
 </div>
