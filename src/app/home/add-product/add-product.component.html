@@ -2,7 +2,7 @@
     <span>
         Step {{stepManageVariable}} of 3
     </span>
-    <div class="modal-body clearfix" *ngIf="stepManageVariable < 2">
+    <div class="dialog-body padding-2 clearfix" *ngIf="stepManageVariable < 2">
         <div [ngClass]="{'p-xl-5 p-lg-5 p-md-3 p-sm-2 p-2':!submitted,'padding-body':submitted}">
             <!--Step 1 start-->
             <form [formGroup]="productAddStepOne" class="needs-validation pl-3 pr-3"
@@ -102,7 +102,7 @@
     </div>
      <!--Step 2 start-->
      <ng-container *ngIf="stepManageVariable === 2">
-        <div class="w-100 dialog-content-height">
+        <div class="w-100 dialog-body padding-1">
             <div class="alert border-0 alert-info">
                 <div class="row d-flex align-items-center p-2">
                     <div class="col-1">
@@ -153,7 +153,7 @@
     <!--Step 2 end-->
     <!--Step 3 start-->
     <ng-container *ngIf="stepManageVariable === 3">
-        <div class="w-100 pl-5 pr-5 pt-3 dialog-content-height">
+        <div class="w-100 pl-5 pr-5 pt-3 dialog-body padding-2">
             <div class="text-center pb-3">
                 <div class="d-flex justify-content-center pb-2">
                     <div class="rounded-circle icon-rightclick"><i class="fa fa-check pt-4 fa-5x"
