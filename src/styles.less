@@ -26,6 +26,10 @@
     color: #ffffff !important;
 }
 
+.ui-button{
+    background-color: white !important;
+}
+
 .btn-outline-primary {
     color: #133e75 !important;
     border-color: #133e75 !important;
@@ -69,23 +73,27 @@ input[type=checkbox] {
     padding: 0.75rem 2.031rem 0.75rem 2.031rem !important;
 }
 
-.p-dialog {
-    .p-dialog-header {
-        border-bottom: 1px solid #dee2e6 !important;
+.ui-dialog {
+    .ui-dialog-titlebar {
         height: 5.9375rem;
+        background-color: #ffffff !important;
+        padding: 1.6rem !important;
+        font-size: 1.5rem !important;
     }
 
-    .p-dialog-footer {
+    .ui-dialog-footer {
+        border: none !important;
         border-top: 1px solid #dee2e6 !important;
         display: flex;
         height: 5.9375rem;
         padding: 1rem !important;
         align-items: center;
         width: 100%;
-        position: fixed;
+        position: sticky !important;
         left: 0;
         bottom: 0;
     }
+
 }
 
 .image-circle {
@@ -108,8 +116,13 @@ input[type=checkbox] {
 }
 
 .modal-body {
-    height: 30rem;
-    max-height: 30rem;
+    height: auto;
+    overflow-y: auto;
+}
+
+.dialog-content-height{
+    height: auto;
+    overflow-y: auto;
 }
 
 .table td {
