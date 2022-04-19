@@ -1,9 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 //basic color variable
-@primary:   #133e75;
-@white: #ffffff;
-@red: #dc3545;
-
+@import './Less/common-style.less';   
+@import './Less/alert-style.less';
+@import './Less/element-style.less';
+@import './Less/grid-style.less';
+@import './Less/padding-style.less';
+@import './Less/table-style.less';
+@import './Less/scrollbar-style.less';
+@import './Less/variables.less';
 .content-title {
     height: 3.125rem;
     align-items: center;
@@ -66,12 +70,6 @@
     }
 }
 
-.alert {
-    padding: 0.15rem 1rem !important;
-    margin-top: 0.5rem !important;
-    border-color: @red !important;
-}
-
 .ui-dialog {
     .ui-dialog-titlebar {
         height: 5.9375rem;
@@ -94,49 +92,7 @@
     }
 }
 
-.image-circle {
-    background-color: #c7c1b0;
-    height: 8.125rem;
-}
-
 .dialog-body {
     height: auto;
     overflow-y: auto;
-}
-
-.table td {
-    height: 2.5rem !important;
-    padding: 0.4rem 1rem 0.4rem 1rem !important;
-}
-
-.tbody-scroll {
-    height: 13rem;
-    display: block;
-    overflow-y: scroll;
-}
-
-.padding-2 {
-    padding: 2rem;
-}
-
-.padding-1 {
-    padding: 0.43rem;
-}
-
-::-webkit-scrollbar {
-    width: 0.625rem;
-    height: 0.625rem;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(90, 90, 90);
-    border-radius: 0.625rem;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.ui-dialog-titlebar-icon:focus{
-    box-shadow: none !important;
 }
