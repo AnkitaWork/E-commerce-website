@@ -10,6 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { CalendarModule } from 'primeng/calendar';
 //Internal imports
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -30,7 +31,8 @@ import { FooterComponent } from './components/footer/footer.component';
     DropdownModule,
     TableModule,
     MultiSelectModule,
-    ContextMenuModule
+    ContextMenuModule,
+    CalendarModule
   ],
   exports: [
     HeaderComponent,
@@ -44,7 +46,8 @@ import { FooterComponent } from './components/footer/footer.component';
     DropdownModule,
     TableModule,
     MultiSelectModule,
-    ContextMenuModule
+    ContextMenuModule,
+    CalendarModule
   ]
 })
 export class SharedModule { }

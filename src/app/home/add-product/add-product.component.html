@@ -12,10 +12,11 @@
                     <label for="upc" class="form-label">UPC</label>
                     <input type="text" class="form-control" pInputText formControlName="upc" id="upc"
                         placeholder="Enter UPC" required>
-                    <div *ngIf="submitted && productAddStepOneFormValue['upc'].errors" class="alert alert-danger d-flex">
+                    <div *ngIf="submitted && productAddStepOneFormValue['upc'].errors"
+                        class="alert alert-danger d-flex">
                         <ng-container *ngIf="productAddStepOneFormValue['upc'].errors.required">
                             <img src="../../../../assets/images/experimental_icon1.png" height="20px">
-                             <span>This field is required.</span>
+                            <span>This field is required.</span>
                         </ng-container>
                     </div>
                 </div>
@@ -31,10 +32,11 @@
                             {{ activity?.displayText }}
                         </option>
                     </select>
-                    <div *ngIf="submitted && productAddStepOneFormValue['activity'].errors" class="alert alert-danger d-flex">
+                    <div *ngIf="submitted && productAddStepOneFormValue['activity'].errors"
+                        class="alert alert-danger d-flex">
                         <ng-container *ngIf="productAddStepOneFormValue['activity'].errors.required">
                             <img src="../../../../assets/images/experimental_icon1.png" height="20px">
-                             This field is required.
+                            This field is required.
                         </ng-container>
                     </div>
                 </div>
@@ -44,7 +46,8 @@
                     <label for="shelflife">Shelf Life (Days)</label>
                     <input type="text" formControlName="shelfLife" pInputText class="form-control" id="shelflife"
                         placeholder="Enter Days" required>
-                    <div *ngIf="submitted && productAddStepOneFormValue['shelfLife'].errors" class="alert alert-danger d-flex">
+                    <div *ngIf="submitted && productAddStepOneFormValue['shelfLife'].errors"
+                        class="alert alert-danger d-flex">
                         <ng-container *ngIf="productAddStepOneFormValue['shelfLife'].errors.required">
                             <img src="../../../../assets/images/experimental_icon1.png" height="20px">
                             This field is required.
@@ -56,6 +59,22 @@
                     </div>
                 </div>
                 <!--Field third end-->
+                <!--Field date picker start-->
+                <div class="form-group" *ngIf="productAddStepOneFormValue['activityInStoreFlag'].value?.length">
+                    <label for="icon">Date Picker</label>
+                    <div>
+                        <p-calendar placeholder="Select Date" appendTo='body' baseZIndex="11001" formControlName="activeDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon">
+                        </p-calendar>
+                    </div>
+                    <div *ngIf="submitted && productAddStepOneFormValue['activeDate'].errors"
+                        class="alert alert-danger d-flex">
+                        <ng-container *ngIf="productAddStepOneFormValue['activeDate'].errors.required">
+                            <img src="../../../../assets/images/experimental_icon1.png" height="20px">
+                            This field is required.
+                        </ng-container>
+                    </div>
+                </div>
+                <!--Field date picker end-->
                 <!--Field four start-->
                 <div class="form-group">
                     <div class="p-field-checkbox">
@@ -100,8 +119,8 @@
             <!--Step 0 end add product-->
         </div>
     </div>
-     <!--Step 2 start-->
-     <ng-container *ngIf="stepManageVariable === 2">
+    <!--Step 2 start-->
+    <ng-container *ngIf="stepManageVariable === 2">
         <div class="w-100 dialog-body padding-1">
             <div class="alert border-0 alert-info">
                 <div class="row d-flex align-items-center">
@@ -136,8 +155,8 @@
                         <tr *ngFor="let country of countryList;let i=index;">
                             <td scope="row" class="col-1">
                                 <div class="p-field-checkbox ml-3">
-                                    <p-checkbox name="checkBoxItem" [(ngModel)]="country.checked"
-                                        [binary]="true"></p-checkbox>
+                                    <p-checkbox name="checkBoxItem" [(ngModel)]="country.checked" [binary]="true">
+                                    </p-checkbox>
                                     <label for="defaultCheck-{{i}}" class="mb-0 margin-left"></label>
                                 </div>
                             </td>

@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.less']
 })
-export class AddProductComponent implements OnInit {
+
+export class AddProductComponent implements OnInit, OnDestroy {
   public submitted: boolean = false; //submit boolean value check form is submit or not
   public productAddStepOne: FormGroup | any; //form group variable
   public displayBasic: boolean = true;
@@ -21,39 +24,40 @@ export class AddProductComponent implements OnInit {
       "id": 1000,
       "counteryName": "011-Atlanta",
       "displayText": '',
-      "checked":false
+      "checked": false
     },
     {
       "id": 1001,
       "counteryName": "002-Centeral",
       "displayText": 'Shelf Me and UPS status may be updated',
-      "checked":false
+      "checked": false
     },
     {
       "id": 1002,
       "counteryName": "035-Delta",
       "displayText": 'Shelf Me and UPS status may be updated',
-      "checked":false
+      "checked": false
     },
     {
       "id": 1003,
       "counteryName": "045-Atlana",
       "displayText": 'Shelf Me and UPS status may be updated',
-      "checked":false
+      "checked": false
     },
     {
       "id": 1004,
       "counteryName": "912-Centeral",
       "displayText": '',
-      "checked":false
+      "checked": false
     },
     {
       "id": 1005,
       "counteryName": "078-Delta",
       "displayText": '',
-      "checked":false
+      "checked": false
     }
   ];
+  private subscription: Subscription | any;
 
   constructor(private ref: DynamicDialogRef, private formBuilder: FormBuilder,) { }
 
@@ -71,11 +75,11 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-   /**
-    * This function is used to onselection changes
-    */
-  public selectAll(value:any){
-    if(value?.checked){
+  /**
+   * This function is used to onselection changes
+   */
+  public selectAll(value: any) {
+    if (value?.checked) {
       this.countryList?.forEach(country => {
         country.checked = true;
       });
@@ -92,16 +96,16 @@ export class AddProductComponent implements OnInit {
     this.ref.close(true);
   }
 
-   /**
-    * This function is used going to back step
-    */
+  /**
+   * This function is used going to back step
+   */
   public backStep(stepIndex: number) {
     this.stepManageVariable = stepIndex;
   }
 
-   /**
-    * This function is used to submit second step
-    */
+  /**
+   * This function is used to submit second step
+   */
   public stepTwoSubmitForm() {
     this.stepManageVariable = 3;
   }
@@ -113,6 +117,7 @@ export class AddProductComponent implements OnInit {
     this.stepManageVariable = 0;
   }
 
+
   /**
     * This function is used to return form control value
     */
@@ -120,10 +125,16 @@ export class AddProductComponent implements OnInit {
     return this.productAddStepOne.controls;
   }
 
+
   ngOnInit(): void {
     this.initStepOneForm(); //create form with field
   }
 
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   /**
     * This function is used to create form and form control fields
@@ -134,6 +145,24 @@ export class AddProductComponent implements OnInit {
       activity: ['', [Validators.required]],
       shelfLife: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
       activityInStoreFlag: ['', [Validators.required]],
+      activeDate: ['']
+    });
+    this.datePickerEnable();
+  }
+
+  /**
+   * This function is used to create active date field dynamic validation when check box is selected 
+   */
+  private datePickerEnable() {
+    this.subscription = this.productAddStepOne.controls.activityInStoreFlag.valueChanges.subscribe((checkBoxValue: any) => {
+      if (checkBoxValue.length) {
+        this.productAddStepOne.controls.activeDate.setValidators([Validators.required]);
+        this.productAddStepOne.controls.activeDate.updateValueAndValidity();
+      } else {
+        this.productAddStepOne.controls.activeDate.setValidators(undefined);
+        this.productAddStepOne.controls.activeDate.setErrors(null);
+        this.productAddStepOne.controls.activeDate.updateValueAndValidity();
+      }
     });
   }
 }
